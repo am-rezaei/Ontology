@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://simple.antology/"
+     xml:base="http://simple.antology/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:simple="http://simple.antology/">
+    <owl:Ontology rdf:about="http://simple.antology/">
+        <owl:versionIRI rdf:resource="http://simple.antology/version"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://simple.antology/isEncouragedBy -->
+
+    <owl:ObjectProperty rdf:about="http://simple.antology/isEncouragedBy">
+        <rdfs:domain rdf:resource="http://simple.antology/UniversityStudent"/>
+        <rdfs:range rdf:resource="http://simple.antology/UniversityTeacher"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://simple.antology/studies -->
+
+    <owl:ObjectProperty rdf:about="http://simple.antology/studies">
+        <rdfs:domain rdf:resource="http://simple.antology/UniversityStudent"/>
+        <rdfs:range rdf:resource="http://simple.antology/UniversityCourse"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://simple.antology/id -->
+
+    <owl:DatatypeProperty rdf:about="http://simple.antology/id">
+        <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://simple.antology/BachelorCourse -->
+
+    <owl:Class rdf:about="http://simple.antology/BachelorCourse">
+        <rdfs:subClassOf rdf:resource="http://simple.antology/UniversityCourse"/>
+        <owl:disjointWith rdf:resource="http://simple.antology/GraduateCourse"/>
+    </owl:Class>
+    
+
+
+    <!-- http://simple.antology/ExcellentStudent -->
+
+    <owl:Class rdf:about="http://simple.antology/ExcellentStudent">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://simple.antology/UniversityStudent"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://simple.antology/isEncouragedBy"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="http://simple.antology/UniversityTeacher"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://simple.antology/UniversityStudent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://simple.antology/GraduateCourse -->
+
+    <owl:Class rdf:about="http://simple.antology/GraduateCourse">
+        <rdfs:subClassOf rdf:resource="http://simple.antology/UniversityCourse"/>
+    </owl:Class>
+    
+
+
+    <!-- http://simple.antology/GraduateStudent -->
+
+    <owl:Class rdf:about="http://simple.antology/GraduateStudent">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://simple.antology/UniversityStudent"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://simple.antology/studies"/>
+                        <owl:someValuesFrom rdf:resource="http://simple.antology/GraduateCourse"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://simple.antology/UniversityStudent"/>
+    </owl:Class>
+    
+
+
+    <!-- http://simple.antology/UniversityCourse -->
+
+    <owl:Class rdf:about="http://simple.antology/UniversityCourse"/>
+    
+
+
+    <!-- http://simple.antology/UniversityStudent -->
+
+    <owl:Class rdf:about="http://simple.antology/UniversityStudent">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://simple.antology/studies"/>
+                <owl:someValuesFrom rdf:resource="http://simple.antology/UniversityCourse"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://simple.antology/UniversityTeacher -->
+
+    <owl:Class rdf:about="http://simple.antology/UniversityTeacher"/>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#Thing">
+        <owl:hasKey rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://simple.antology/id"/>
+        </owl:hasKey>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://simple.antology/Advance_Topics_in_IoT -->
+
+    <owl:NamedIndividual rdf:about="http://simple.antology/Advance_Topics_in_IoT">
+        <rdf:type rdf:resource="http://simple.antology/GraduateCourse"/>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</id>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://simple.antology/Computer_Networks -->
+
+    <owl:NamedIndividual rdf:about="http://simple.antology/Computer_Networks">
+        <rdf:type rdf:resource="http://simple.antology/BachelorCourse"/>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</id>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://simple.antology/Person1 -->
+
+    <owl:NamedIndividual rdf:about="http://simple.antology/Person1">
+        <studies rdf:resource="http://simple.antology/Advance_Topics_in_IoT"/>
+        <studies rdf:resource="http://simple.antology/Software_Engineering"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://simple.antology/Person2 -->
+
+    <owl:NamedIndividual rdf:about="http://simple.antology/Person2">
+        <isEncouragedBy rdf:resource="http://simple.antology/Teacher1"/>
+        <isEncouragedBy rdf:resource="http://simple.antology/Teacher2"/>
+        <studies rdf:resource="http://simple.antology/Software_Engineering"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://simple.antology/Person3 -->
+
+    <owl:NamedIndividual rdf:about="http://simple.antology/Person3">
+        <studies rdf:resource="http://simple.antology/Computer_Networks"/>
+        <studies rdf:resource="http://simple.antology/Software_Engineering"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://simple.antology/Software_Engineering -->
+
+    <owl:NamedIndividual rdf:about="http://simple.antology/Software_Engineering">
+        <rdf:type rdf:resource="http://simple.antology/BachelorCourse"/>
+        <id rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</id>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://simple.antology/Teacher1 -->
+
+    <owl:NamedIndividual rdf:about="http://simple.antology/Teacher1">
+        <rdf:type rdf:resource="http://simple.antology/UniversityTeacher"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://simple.antology/Teacher2 -->
+
+    <owl:NamedIndividual rdf:about="http://simple.antology/Teacher2">
+        <rdf:type rdf:resource="http://simple.antology/UniversityTeacher"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://simple.antology/UniversityCourse"/>
+            <rdf:Description rdf:about="http://simple.antology/UniversityStudent"/>
+            <rdf:Description rdf:about="http://simple.antology/UniversityTeacher"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://simple.antology/Advance_Topics_in_IoT"/>
+            <rdf:Description rdf:about="http://simple.antology/Computer_Networks"/>
+            <rdf:Description rdf:about="http://simple.antology/Software_Engineering"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://simple.antology/Person1"/>
+            <rdf:Description rdf:about="http://simple.antology/Person2"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDifferent"/>
+        <owl:distinctMembers rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://simple.antology/Teacher1"/>
+            <rdf:Description rdf:about="http://simple.antology/Teacher2"/>
+        </owl:distinctMembers>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
