@@ -3,6 +3,8 @@ package com.amin.ontology.Model;
 public class StudyDTO {
     private String student;
     private String course;
+    public StudyDTO() {
+    }
 
     public StudyDTO(String student, String course) {
         this.student = student;

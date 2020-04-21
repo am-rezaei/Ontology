@@ -82,10 +82,6 @@ public class UniversityOntologyService {
     }
 
 
-    public String createAllDifference() {
-        return model.createAllDifferent().getModel().toString();
-    }
-
     public String queryModel(QueryDTO queryDTO) {
         String res = "";
         model = (model.createAllDifferent().getOntModel());
@@ -97,8 +93,8 @@ public class UniversityOntologyService {
             ResultSet results = qexec.execSelect();
             while (results.hasNext()) {
                 QuerySolution soln = results.nextSolution();
-                 if (Arrays.asList(queryDTO.getFilter().split(",")).stream().anyMatch(p -> soln.toString().toLowerCase().contains(p.toLowerCase())))
-                res += "\n" + soln.toString();
+                if (Arrays.asList(queryDTO.getFilter().split(",")).stream().anyMatch(p -> soln.toString().toLowerCase().contains(p.toLowerCase())))
+                    res += "\n" + soln.toString();
             }
         } catch (Exception x) {
             System.out.println(x.getMessage());
@@ -108,24 +104,6 @@ public class UniversityOntologyService {
         return res;
     }
 
-    public String getInferred() {
-        String res = "";
-        model = (model.createAllDifferent().getOntModel());
-        Model inf = ModelFactory.createOntologyModel(
-                OntModelSpec.OWL_DL_MEM_RULE_INF, model);
-
-        ExtendedIterator<Statement> stmts = inf.listStatements().filterDrop(new Filter<Statement>() {
-            @Override
-            public boolean accept(Statement o) {
-                return model.contains(o);
-            }
-        });
-        List<Statement> lst = stmts.toList();
-        for (Statement s:lst) {
-            res+=s+"\n";
-        }
-        return res;
-    }
 
     public List<ResultDTO> getResult() {
         List<ResultDTO> result = new ArrayList<>();
@@ -139,11 +117,9 @@ public class UniversityOntologyService {
         String queryString =
                 "PREFIX NS: <" + Const.NS + "> " +
                         " PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                        "SELECT  * WHERE { " +
+                        "SELECT  ?A WHERE { " +
                         "    ?A rdf:type NS:ExcellentStudent ." +
                         "}";
-
-//        queryString =  "SELECT  * WHERE { ?A ?B ?C }";
         Query query = QueryFactory.create(queryString);
         QueryExecution qexec = QueryExecutionFactory.create(query, inf);
         try {
@@ -151,14 +127,34 @@ public class UniversityOntologyService {
             while (results.hasNext()) {
                 QuerySolution soln = results.nextSolution();
                 //System.out.println(soln);
-                result.add(new ResultDTO(soln.toString(), "SEND_CARD_POSTAL"));
+                result.add(new ResultDTO(soln.toString(), "EXCELLENT_STUDENT", "SEND_CARD_POSTAL"));
             }
         } catch (Exception x) {
             System.out.println(x.getMessage());
         } finally {
             qexec.close();
         }
-
+        // try to get a list of excellent students to send a cart postal
+        queryString =
+                "PREFIX NS: <" + Const.NS + "> " +
+                        " PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                        "SELECT  ?A WHERE { " +
+                        "    ?A rdf:type NS:GraduateStudent ." +
+                        "}";
+        query = QueryFactory.create(queryString);
+        qexec = QueryExecutionFactory.create(query, inf);
+        try {
+            ResultSet results = qexec.execSelect();
+            while (results.hasNext()) {
+                QuerySolution soln = results.nextSolution();
+                //System.out.println(soln);
+                result.add(new ResultDTO(soln.toString(), "GRADUATE_STUDENT", "REMINDER_TO_WORK_HARD"));
+            }
+        } catch (Exception x) {
+            System.out.println(x.getMessage());
+        } finally {
+            qexec.close();
+        }
 
         return result;
     }

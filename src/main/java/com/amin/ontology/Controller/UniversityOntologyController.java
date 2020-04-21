@@ -24,28 +24,25 @@ public class UniversityOntologyController {
     }
 
 
-    @PostConstruct
+     @PostConstruct
     void init() {
         CourseDTO courseDTO = new CourseDTO("SW_Eng");
         addGraduateCourse(courseDTO);
-        StudentDTO studentDTO = new StudentDTO("Ali");
+        StudentDTO studentDTO = new StudentDTO("Amin");
         addStudent(studentDTO);
-        TeacherDTO teacherDTO1 = new TeacherDTO("Marzieh");
+        StudentDTO studentDTO2 = new StudentDTO("Jack");
+        addStudent(studentDTO2);
+        TeacherDTO teacherDTO1 = new TeacherDTO("GreatTeacher1");
         addTeacher(teacherDTO1);
-        TeacherDTO teacherDTO2 = new TeacherDTO("Amin");
+        TeacherDTO teacherDTO2 = new TeacherDTO("GreatTeacher2");
         addTeacher(teacherDTO2);
-        StudyDTO studyDTO = new StudyDTO("Ali", "SW_Eng");
+        StudyDTO studyDTO = new StudyDTO("Amin", "SW_Eng");
         addStudy(studyDTO);
-        EncourageDTO encourageDTO1 = new EncourageDTO("Ali", "Amin");
+        EncourageDTO encourageDTO1 = new EncourageDTO("Jack", "GreatTeacher1");
         addEncouragedBy(encourageDTO1);
-        EncourageDTO encourageDTO2 = new EncourageDTO("Ali", "Marzieh");
+        EncourageDTO encourageDTO2 = new EncourageDTO("Jack", "GreatTeacher2");
         addEncouragedBy(encourageDTO2);
         logger.info(" POST CONSTRUCT MODELS FINISHED !");
-    }
-
-    @GetMapping("/getOntology")
-    private String getOntology() {
-        return ontologyService.getOntology();
     }
 
     @GetMapping("/resetModel")
@@ -67,16 +64,6 @@ public class UniversityOntologyController {
     private String queryModel(@RequestBody QueryDTO queryDTO) {
         queryDTO.setText(queryDTO.getText().replace("@@","\n"));
         return ontologyService.queryModel(queryDTO);
-    }
-
-    @PostMapping("difference")
-    private String difference() {
-        return ontologyService.createAllDifference();
-    }
-
-    @GetMapping("getInferred")
-    private String getInferred() {
-        return ontologyService.getInferred();
     }
 
     @PostMapping("addStudent")

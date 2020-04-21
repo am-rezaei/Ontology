@@ -2,7 +2,8 @@ package com.amin.ontology.Model;
 
 public class TeacherDTO {
     private String name;
-
+    public TeacherDTO() {
+    }
     public TeacherDTO(String name) {
         this.name = name;
     }

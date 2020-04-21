@@ -3,10 +3,19 @@ package com.amin.ontology.Model;
 public class ResultDTO {
     String studentName;
     String action;
-
-    public ResultDTO(String studentName, String action) {
+    String studentType;
+    public ResultDTO(String studentName,String studentType, String action) {
         this.studentName = studentName;
+        this.studentType=studentType;
         this.action = action;
+    }
+
+    public String getStudentType() {
+        return studentType;
+    }
+
+    public void setStudentType(String studentType) {
+        this.studentType = studentType;
     }
 
     public String getStudentName() {

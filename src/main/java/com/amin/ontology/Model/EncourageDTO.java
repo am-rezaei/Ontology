@@ -4,6 +4,8 @@ public class EncourageDTO {
     String student;
     String teacher;
 
+    public EncourageDTO() {
+    }
     public EncourageDTO(String student, String teacher) {
         this.student = student;
         this.teacher = teacher;

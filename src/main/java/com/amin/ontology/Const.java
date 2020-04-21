@@ -8,5 +8,5 @@ public class Const {
     public static String UNIVERSITY_STUDENT =NS+"UniversityStudent";
     public static String STUDY=NS+"studies";
     public static String ENCOURAGE_BY =NS+"isEncouragedBy";
-    public static String ONTOLOGY_FILE_PATH ="/Users/amin/Desktop/MyReports/Projects/P1/src/main/resources/UniversityOntology.owl";
+    public static String ONTOLOGY_FILE_PATH ="UniversityOntology.owl";
 }
